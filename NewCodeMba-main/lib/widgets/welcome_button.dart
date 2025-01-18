@@ -7,39 +7,50 @@ class WelcomeButton extends StatelessWidget {
     required this.onTap,
     required this.color,
     required this.textColor,
+    required this.elevation,        // เพิ่มพารามิเตอร์ elevation
+    required this.borderRadius,     // เพิ่มพารามิเตอร์ borderRadius
+    required this.borderSide,       // เพิ่มพารามิเตอร์ borderSide
+    required this.padding,          // เพิ่มพารามิเตอร์ padding
   });
 
-  final String buttonText; // ข้อความที่จะแสดงบนปุ่ม
-  final Widget onTap; // หน้าจอที่ต้องการนำทางเมื่อกดปุ่ม
-  final Color color; // สีพื้นหลังของปุ่ม
-  final Color textColor; // สีข้อความในปุ่ม
+  final String buttonText;
+  final VoidCallback onTap;
+  final Color color;
+  final Color textColor;
+  final double elevation;          // ใช้สำหรับเงาของปุ่ม
+  final BorderRadiusGeometry borderRadius; // ใช้สำหรับกำหนดขอบปุ่ม
+  final BorderSide borderSide;    // ใช้สำหรับขอบของปุ่ม
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => onTap, // นำทางไปยังหน้าที่ระบุใน onTap
-          ),
-        );
-      },
+      onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(30.0), // ระยะ Padding ของปุ่ม
+        padding: padding,
         decoration: BoxDecoration(
-          color: color, // สีพื้นหลังของปุ่ม
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(50), // มุมโค้งที่มุมซ้ายบน
+          color: color,
+          borderRadius: borderRadius,
+          border: Border.all(
+            color: borderSide.color,      // ใช้สีขอบที่กำหนด
+            width: borderSide.width,      // ใช้ความกว้างของขอบที่กำหนด
           ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: elevation,       // ใช้ความเบลอของเงา
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
-        child: Text(
-          buttonText, // ข้อความในปุ่ม
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 20.0, // ขนาดฟอนต์
-            fontWeight: FontWeight.bold, // น้ำหนักฟอนต์
-            color: textColor, // สีข้อความในปุ่ม
+        child: Center(
+          child: Text(
+            buttonText,
+            style: TextStyle(
+              fontSize: 18,
+              color: textColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

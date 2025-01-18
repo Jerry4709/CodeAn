@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:team_up/screens/welcome_screen.dart';
+import 'package:team_up/screens/welcome_screen.dart'; // นำเข้า WelcomeScreen
+import 'package:team_up/screens/signin_screen.dart'; // นำเข้า SignInScreen
+import 'package:team_up/screens/signup_screen.dart'; // นำเข้า SignUpScreen
 
 void main() {
   runApp(const MyApp());

@@ -1,19 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors'); // เพิ่มการ Import CORS
 
 const app = express();
 
-// Connection String ตรง (กรอกข้อมูลจริง)
-const MONGO_URI = "mongodb+srv://jimmy551:1231123123ZZZZZ@test.rndif.mongodb.net/Test?retryWrites=true&w=majority";
+// เชื่อมต่อ MongoDB
+const MONGO_URI = "mongodb+srv://jimmy551:myPassword@test.rndif.mongodb.net/Test?retryWrites=true&w=majority";
 
-// ฟังก์ชันสำหรับเชื่อมต่อ MongoDB
 const connectDB = async () => {
   try {
-    // เชื่อมต่อ MongoDB โดยตรง
-    await mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true, // ใช้สำหรับ MongoDB Driver เก่า
-      useUnifiedTopology: true // ใช้สำหรับ MongoDB Driver เก่า
-    });
+    await mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log('MongoDB Connected...');
   } catch (err) {
     console.error('Error connecting to MongoDB:', err.message);
@@ -21,29 +17,23 @@ const connectDB = async () => {
   }
 };
 
-// เชื่อมต่อ MongoDB
 connectDB();
 
-// Middleware สำหรับจัดการ JSON
+// Middleware สำหรับ JSON
 app.use(express.json());
+app.use(cors()); // เพิ่ม Middleware สำหรับ CORS
 
-// Debug Route Middleware
-app.use('/api/auth', (req, res, next) => {
-  console.log('Route /api/auth accessed'); // Debug: แสดงเมื่อมีการเข้าถึง /api/auth
-  next();
-});
-
-// เชื่อมต่อ Routes (API สำหรับ Authentication)
+// เชื่อมต่อ Routes
 app.use('/api/auth', require('./routes/auth'));
 
-// ตัวอย่าง Route ทดสอบ
+// ตัวอย่าง Route
 app.get('/', (req, res) => {
-  console.log('GET / accessed'); // Debug: แสดงเมื่อมีการเข้าถึง /
-  res.send('Server is running...');
+  res.send('API is running...');
 });
 
-// กำหนด PORT ตรง
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// รันเซิร์ฟเวอร์
+const PORT = process.env.PORT || 5001;  // เปลี่ยนพอร์ตเป็น 5001 หรือพอร์ตที่ว่าง
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on http://0.0.0.0:${PORT}`);
 });
+
