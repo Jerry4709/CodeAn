@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _fetchRoomsFromDatabase() async {
-    final url = Uri.parse('http://192.168.x.x:5001/api/rooms');
+    final url = Uri.parse('https://team-up.up.railway.app/api/rooms');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {

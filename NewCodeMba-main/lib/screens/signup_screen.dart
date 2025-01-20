@@ -22,7 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   // ฟังก์ชันสำหรับสมัครสมาชิก
   Future<void> _signupUser() async {
-    const String apiUrl = 'http://localhost:5001/api/auth/signup'; // URL ของ API
+    const String apiUrl = 'https://team-up.up.railway.app/api/auth/signup'; // URL ของ API
 
     final String name = _nameController.text;
     final String email = _emailController.text;

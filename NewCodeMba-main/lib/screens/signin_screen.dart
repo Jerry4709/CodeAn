@@ -22,7 +22,7 @@ class _SignInScreenState extends State<SignInScreen> {
   bool rememberPassword = true;
 
   Future<void> _loginUser() async {
-    const String apiUrl = 'http://localhost:5001/api/auth/login'; // ใช้ API Endpoint ที่ถูกต้อง
+    const String apiUrl = 'https://team-up.up.railway.app/api/auth/login'; // ใช้ API Endpoint ที่ถูกต้อง
 
     final String email = _emailController.text.trim();
     final String password = _passwordController.text.trim();

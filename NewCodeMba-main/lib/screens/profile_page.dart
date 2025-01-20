@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // ฟังก์ชันสำหรับดึงข้อมูลผู้ใช้จาก API
   Future<void> fetchUserData() async {
-    final String apiUrl = 'http://localhost:5001/api/auth/profile'; // API สำหรับดึงข้อมูลโปรไฟล์
+    final String apiUrl = 'https://team-up.up.railway.app/api/auth/profile'; // API สำหรับดึงข้อมูลโปรไฟล์
     try {
       final response = await http.get(
         Uri.parse(apiUrl),
@@ -58,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // ฟังก์ชันสำหรับอัปเดตข้อมูลในฐานข้อมูล
   Future<void> updateUserData(String field, String value) async {
-    final String apiUrl = 'http://localhost:5001/api/auth/profile/update'; // API สำหรับอัปเดตข้อมูลโปรไฟล์
+    final String apiUrl = 'https://team-up.up.railway.app/api/auth/profile/update'; // API สำหรับอัปเดตข้อมูลโปรไฟล์
     try {
       final response = await http.put(
         Uri.parse(apiUrl),
@@ -87,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // ฟังก์ชันสำหรับอัปโหลดภาพโปรไฟล์
   Future<void> uploadProfileImage(File imageFile) async {
-    final String apiUrl = 'http://localhost:5001/api/auth/profile/upload';
+    final String apiUrl = 'https://team-up.up.railway.app/api/auth/profile/upload';
     try {
       final request = http.MultipartRequest('POST', Uri.parse(apiUrl))
         ..headers['Authorization'] = 'Bearer ${widget.token}'
@@ -113,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // ฟังก์ชันสำหรับเปลี่ยนรหัสผ่าน
   Future<void> changePassword(String currentPassword, String newPassword) async {
-    final String apiUrl = 'http://localhost:5001/api/auth/profile/change-password'; // API สำหรับเปลี่ยนรหัสผ่าน
+    final String apiUrl = 'https://team-up.up.railway.app/api/auth/profile/change-password'; // API สำหรับเปลี่ยนรหัสผ่าน
     try {
       final response = await http.put(
         Uri.parse(apiUrl),
@@ -247,7 +247,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ? FileImage(_imageFile!)
                               : (profileImage.isNotEmpty
                               ? NetworkImage(
-                              'http://localhost:5001$profileImage')
+                              'https://team-up.up.railway.app$profileImage')
                               : const AssetImage(
                               'assets/images/default_avatar.png'))
                           as ImageProvider,

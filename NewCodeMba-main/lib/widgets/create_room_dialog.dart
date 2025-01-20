@@ -192,7 +192,7 @@ class _CreateRoomDialogState extends State<CreateRoomDialog> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://localhost:5001/api/rooms'), // แก้ URL ให้ตรงกับเซิร์ฟเวอร์ของคุณ
+        Uri.parse('https://team-up.up.railway.app/api/rooms'), // แก้ URL ให้ตรงกับเซิร์ฟเวอร์ของคุณ
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(roomData),
       );
