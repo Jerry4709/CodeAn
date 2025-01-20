@@ -31,10 +31,20 @@ router.post('/join/:roomId', async (req, res) => {
     if (!room) {
       return res.status(404).json({ message: 'Room not found' });
     }
+
+    // ตรวจสอบว่าผู้ใช้เคยจอยห้องนี้แล้วหรือไม่ (เช็คจากผู้ที่จอยแล้ว)
     if (room.currentParticipants >= room.maxParticipants) {
       return res.status(400).json({ message: 'Room is full' });
     }
+
+    // เพิ่มผู้ใช้งานในห้อง (หากยังไม่จอย)
+    if (room.participants.includes(req.user)) {
+      return res.status(400).json({ message: 'You have already joined this room' });
+    }
+
     room.currentParticipants += 1; // เพิ่มจำนวนผู้เข้าร่วม
+    room.participants.push(req.user); // เพิ่ม User ที่จอยห้อง
+
     await room.save();
     res.status(200).json({ message: 'Joined successfully', room });
   } catch (err) {
