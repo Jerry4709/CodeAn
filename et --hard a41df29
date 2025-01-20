@@ -1,0 +1,9 @@
+[33m5c448c8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mV2[m[33m, [m[1;31morigin/V2[m[33m)[m HEAD@{0}: reset: moving to origin/V2
+[33m5c448c8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mV2[m[33m, [m[1;31morigin/V2[m[33m)[m HEAD@{1}: reset: moving to origin/V2
+[33ma41df29[m HEAD@{2}: reset: moving to HEAD
+[33ma41df29[m HEAD@{3}: reset: moving to V2
+[33ma41df29[m HEAD@{4}: Branch: renamed refs/heads/V3 to refs/heads/V2
+[33ma41df29[m HEAD@{6}: reset: moving to V3
+[33ma41df29[m HEAD@{7}: reset: moving to v3
+[33ma41df29[m HEAD@{8}: Branch: renamed refs/heads/master to refs/heads/V3
+[33ma41df29[m HEAD@{10}: commit (initial): V3
