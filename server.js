@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors'); // ประกาศเพียงครั้งเดียว
+const cors = require('cors');
 const path = require('path');
+const morgan = require('morgan');
+const helmet = require('helmet');
 const connectDB = require('./config/db'); // นำเข้าโมดูลสำหรับเชื่อมต่อ MongoDB
 
 const app = express();
@@ -11,9 +13,9 @@ connectDB();
 
 // Middleware
 app.use(express.json());
-
-// อนุญาตให้ทุกต้นทางสามารถเข้าถึง API
 app.use(cors());
+app.use(morgan('dev'));
+app.use(helmet());
 
 // Static Folder สำหรับไฟล์อัปโหลด
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -30,6 +32,12 @@ app.get('/', (req, res) => {
 // Handle 404 Error
 app.use((req, res, next) => {
   res.status(404).json({ message: 'API endpoint not found' });
+});
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Internal Server Error' });
 });
 
 // Run Server
